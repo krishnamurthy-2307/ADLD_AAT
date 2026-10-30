@@ -1,0 +1,32 @@
+module tb_moore_detector;
+
+reg clk, reset, x;
+wire z;
+
+moore_detector uut(clk, reset, x, z);
+
+always #5 clk = ~clk;
+
+initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, tb_moore_detector);
+
+    clk=0;
+    reset=1;
+    x=0;
+
+    #12 reset=0;
+
+    x=1; #10;
+    x=0; #10;
+    x=1; #10;
+
+    x=1; #10;
+    x=0; #10;
+    x=1; #10;
+
+    #20 $finish;
+end
+
+endmodule
+
