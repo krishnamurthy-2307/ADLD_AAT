@@ -1,0 +1,24 @@
+module tb_timer;
+
+reg clk, reset, enable;
+wire done;
+
+timer #(.N(5)) uut(clk, reset, enable, done);
+
+always #5 clk = ~clk;
+
+initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, tb_timer);
+
+    clk=0;
+    reset=1;
+    enable=0;
+
+    #12 reset=0;
+    enable=1;
+
+    #100 enable=0;
+    #20 $finish;
+end
+endmodule
