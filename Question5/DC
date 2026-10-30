@@ -1,0 +1,32 @@
+module timer #(
+    parameter N = 5
+)(
+    input clk,
+    input reset,
+    input enable,
+    output reg done
+);
+
+reg [31:0] count;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        count <= 0;
+        done <= 0;
+    end
+   
+ else if (enable) begin
+        if (count == N-1) begin
+            count <= 0;
+            done <= 1;
+        end
+        else begin
+            count <= count + 1;
+            done <= 0;
+        end
+    end
+    else begin
+        done <= 0;
+    end
+end
+endmodule
