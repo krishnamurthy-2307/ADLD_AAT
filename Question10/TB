@@ -1,0 +1,21 @@
+module tb_divide_by_n;
+
+reg clk, reset;
+wire clk_out;
+
+divide_by_n #(.N(5)) uut(clk, reset, clk_out);
+
+always #5 clk = ~clk;
+
+initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, tb_divide_by_n);
+
+    clk=0;
+    reset=1;
+
+    #12 reset=0;
+    #220 $finish;
+end
+
+endmodule
