@@ -1,0 +1,11 @@
+module parity_generator_checker (
+    input [3:0] data,
+    input parity_in,
+    output parity_out,
+    output error
+);
+
+assign parity_out = ^data;
+assign error = ^{data, parity_in};
+
+endmodule
