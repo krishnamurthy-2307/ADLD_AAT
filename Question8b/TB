@@ -1,0 +1,21 @@
+module tb_asynchronous_counter;
+
+reg clk, reset;
+wire [3:0] q;
+
+asynchronous_counter uut(clk, reset, q);
+
+always #5 clk = ~clk;
+
+initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, tb_asynchronous_counter);
+
+    clk=0;
+    reset=1;
+
+    #12 reset=0;
+    #180 $finish;
+end
+
+endmodule
