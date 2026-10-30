@@ -1,0 +1,22 @@
+module tb_ring_counter;
+
+reg clk, reset;
+wire [3:0] q;
+
+ring_counter uut(clk, reset, q);
+
+always #5 clk = ~clk;
+
+initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, tb_ring_counter);
+
+    clk=0;
+    reset=1;
+
+    #12 reset=0;
+    #80 $finish;
+end
+
+
+endmodule
